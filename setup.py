@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
-from pip.req import parse_requirements
+from pip._internal.req import parse_requirements
 
 with open('README.md') as f:
     readme = f.read()
@@ -14,7 +14,7 @@ setup(
     version='0.1.0',
     description='Python package for calculating correlation amongst categorical variables',
     long_description=readme,
-    long_description_content_type="text/markdown",
+    long_description_content_type='text/markdown',
     author='Anurag Kumar Mishra',
     author_email='anuragkm25@outlook.com',
     url='https://github.com/MavericksDS/pycorrcat',
