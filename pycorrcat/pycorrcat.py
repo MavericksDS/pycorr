@@ -13,7 +13,7 @@ def corr(x,
          y,
          bias_correction=True,
          Tschuprow=False):
-     """
+    """
     Calculates correlation statistic for categorical-categorical association.
     The two measures supported are:
     1. Cramer'V ( default )
@@ -50,7 +50,7 @@ def corr(x,
             phi2_corrected = max(0, phi2 - ((r - 1) * (c - 1)) / (n_observations - 1))
             r_corrected  = r - ((r - 1)**2) / (n_observations - 1)
             c_corrected = c - ((c - 1)**2) / (n_observations - 1)
-            if Tshcuprow:
+            if Tschuprow:
                 corr_coeff = np.sqrt(phi2_corrected / np.sqrt((r_corrected - 1)*(c_corrected - 1)))
                 return corr_coeff
             corr_coeff = np.sqrt(phi2_corrected / min((r_corrected - 1), (c_corrected - 1)))

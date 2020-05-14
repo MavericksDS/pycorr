@@ -2,23 +2,21 @@
 
 from setuptools import setup, find_packages
 from pip._internal.req import parse_requirements
+from os import path
 
-with open('README.md') as f:
-    readme = f.read()
-
-with open('LICENSE') as f:
-    license = f.read()
+this_directory = path.abspath(path.dirname(__file__))
+with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
 
 setup(
-    name='pycorrcat',
-    version='0.1.0',
+    name='pycorr',
+    version='0.1.2',
     description='Python package for calculating correlation amongst categorical variables',
-    long_description=readme,
     long_description_content_type='text/markdown',
+    long_description=long_description,
     author='Anurag Kumar Mishra',
     author_email='anuragkm25@outlook.com',
-    url='https://github.com/MavericksDS/pycorrcat',
-    license=license,
+    url='https://github.com/MavericksDS/pycorr',
     packages=find_packages(exclude=('tests', 'docs')),
     install_reqs = parse_requirements('requirements.txt', session='hack'),
     classifiers=[
