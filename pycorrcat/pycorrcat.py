@@ -2,6 +2,9 @@ import warnings
 import pandas as pd
 import scipy.stats as stats
 import numpy as np
+from typing import List
+import matplotlib as matplotlib
+import seaborn as sns
 
 def fillna(object):
     if isinstance(object, pd.Series):
@@ -63,3 +66,81 @@ def corr(x,
     except:
         warnings.warn("Error calculating Cramer's V",RuntimeWarning)
         return corr_coeff
+
+
+def corr_matrix(data: pd.DataFrame, 
+                columns: List,
+                bias_correction: bool=True,
+                Tschuprow: bool=False) -> pd.DataFrame:
+    """
+    Calculates correlation for all the columns provided and returns pandas like correlation matrix.
+    The two measures supported are:
+    1. Cramer'V ( default )
+    2. Tschuprow'T
+
+    Parameters:
+    -----------
+    data : pandas DataFrame
+        A pandas DataFrame containing the categorical columns
+    columns : list 
+        A list of categorical columns
+    bias_correction : Boolean, default = True
+    Tschuprow : Boolean, default = False
+               For choosing Tschuprow as measure
+    Returns:
+    --------
+    pandas dataframe object similar to pandas.DataFrame.corr()
+    """
+    # checking length of columns
+    if not columns.__len__()>0 or set(data.columns.values).intersection(columns).__len__()>0 :
+        ValueError("Check the columns list provided")
+
+    target_data = data.filter(columns)
+    cols = target_data.columns.values
+    shape = target_data.columns.__len__()
+
+    matrix = np.zeros((shape, shape))
+    for x,i in enumerate(cols):
+        temp = np.zeros((0, shape))
+        for j in cols:
+            temp = np.append(temp,corr(target_data[i], target_data[j], bias_correction=bias_correction, Tschuprow=Tschuprow))
+        matrix[x] = temp
+
+    corr_matrix = pd.DataFrame(data=matrix,
+                            index=cols,
+                            columns=cols)
+    return corr_matrix
+
+def plot_corr(data: pd.DataFrame,
+              columns: List,
+              diagonal: str = False,
+              bias_correction: bool=True,
+              Tschuprow: bool=False
+            ) -> matplotlib.axes.Axes:
+    """
+    Plots correlation matrix for all the columns provided and returns Matplotlib axes.
+    The two measures supported are:
+    1. Cramer'V ( default )
+    2. Tschuprow'T
+
+    Parameters:
+    -----------
+    data : pandas DataFrame
+        A pandas DataFrame containing the categorical columns
+    columns : list 
+        A list of categorical columns
+    diagonal :  string
+        When true gives a masked version of heatmap
+    bias_correction : Boolean, default = True
+    Tschuprow : Boolean, default = False
+               For choosing Tschuprow as measure
+    Returns:
+    --------
+    ax : matplotlib Axes
+    Axes object with the heatmap.
+    """
+    corr = corr_matrix(data, columns, bias_correction=bias_correction, Tschuprow=Tschuprow)
+    if(diagonal):
+        mask = np.triu(corr)
+        return sns.heatmap(corr, annot=True, mask=mask)
+    return sns.heatmap(corr, annot=True)

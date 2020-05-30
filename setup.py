@@ -10,7 +10,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='pycorr',
-    version='0.1.2',
+    version='0.1.3',
     description='Python package for calculating correlation amongst categorical variables',
     long_description_content_type='text/markdown',
     long_description=long_description,

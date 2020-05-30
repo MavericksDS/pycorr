@@ -1,9 +1,12 @@
 bleach==3.1.5
 certifi==2020.4.5.1
 chardet==3.0.4
+cycler==0.10.0
 docutils==0.16
 idna==2.9
 keyring==21.2.1
+kiwisolver==1.2.0
+matplotlib==3.2.1
 numpy==1.18.4
 packaging==20.3
 pandas==1.0.3
@@ -17,9 +20,9 @@ readme-renderer==26.0
 requests==2.23.0
 requests-toolbelt==0.9.1
 scipy==1.4.1
+seaborn==0.10.1
 six==1.14.0
 tqdm==4.46.0
 twine==3.1.1
 urllib3==1.25.9
 webencodings==0.5.1
-wheel==0.33.1
