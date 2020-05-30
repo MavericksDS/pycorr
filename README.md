@@ -4,14 +4,25 @@ A simple library to calculate correlation between variables. Currently provides 
 Based on statistical methodology like Cramer'V and Tschuprow'T allows to gauge the correlation between categorical variables. Ability to plot the correlation in form of heatmap is also provided.
 
 ## Usage example
+```
+import pandas as pd
+from pycorrcat.pycorrcat import plot_corr, corr_matrix
 
+df = pd.DataFrame([('a', 'b'), ('a', 'd'), ('c', 'b'), ('e', 'd')],
+                  columns=['dogs', 'cats'])
+
+correlation_matrix = corr_matrix(data, ['dogs', 'cats'])
+plot_corr(df, ['dogs','cats'] )
+```
 
 ## Development setup
+Create a virtualenv and install dependencies from ```requirements.txt``` and continue with code change.
 
 ## Release History
 
+* 0.1.4
+    * CHANGE: Changed the documentation (no code change)
 * 0.1.3
-    * CHANGE: Remove `setDefaultXYZ()`
     * ADD: Ability to pass dataframe to get correlation matrix
     * ADD: Ability to plot the correlation in form of heatmap
 * 0.1.2
@@ -19,13 +30,13 @@ Based on statistical methodology like Cramer'V and Tschuprow'T allows to gauge t
 * 0.1.1
     * Test release
 
-## Meta
+## Author and Contributor
 
-Anurag Kumar Mishra – [https://github.com/anuragithub](https://github.com/anuragithub) – anuragkm25@outlook.com
+Anurag Kumar Mishra – Connect on [github](https://github.com/anuragithub) or drop a [mail](mailto:anuragkm25@outlook.com)
 
 Distributed under the GNU license. See ``LICENSE`` for more information.
 
-[https://github.com/MavericksDS/pycorr](https://github.com/MavericksDS/pycorr)
+Github repo link  [https://github.com/MavericksDS/pycorr](https://github.com/MavericksDS/pycorr)
 
 
 ## Contributing
