@@ -22,6 +22,10 @@ class TestPycorrcat(unittest.TestCase):
                 "cat_2": cat_2,
             }
         )
+
+        # Make an exact copy of cat_1
+        df["cat_1_copy"] = df["cat_1"]
+
         cls.df = df
         return
 
@@ -33,4 +37,15 @@ class TestPycorrcat(unittest.TestCase):
     def test_corr_not_correlated(self):
         corr = pycorrcat.corr(self.df["cat_1"], self.df["cat_2"])
         self.assertTrue(corr < 0.0001)
+        return
+
+    def test_corr_matrix(self):
+        corr_matrix = pycorrcat.corr_matrix(
+            data=self.df, columns=["cat_1", "cat_1_copy", "cat_2"]
+        )
+        self.assertTrue(round(corr_matrix["cat_1"]["cat_1"], 15) == 1.0)
+        self.assertTrue(round(corr_matrix["cat_1"]["cat_1_copy"], 15) == 1.0)
+        self.assertTrue(round(corr_matrix["cat_1_copy"]["cat_1"], 15) == 1.0)
+        self.assertTrue(round(corr_matrix["cat_1"]["cat_2"], 15) == 0.0)
+        self.assertTrue(round(corr_matrix["cat_2"]["cat_1"], 15) == 0.0)
         return
