@@ -16,7 +16,14 @@ plot_corr(df, ['dogs','cats'] )
 ```
 
 ## Development setup
-Create a virtualenv and install dependencies from ```requirements.txt``` and continue with code change.
+Create a virtualenv and install dependencies:
+- `pip install -r requirements.dev.txt`
+- `pip install -r requirements.txt`
+Then install the pre-commit hooks: `pre-commit install` and continue with code change.
+
+### Run `pre-commit` locally to check files
+
+`pre-commit run --all-files`
 
 ## Release History
 
