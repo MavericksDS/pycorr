@@ -34,6 +34,7 @@ references:
     run:
       name: Build and publish
       command: |
+        . venv/bin/activate
         python3 setup.py sdist bdist_wheel
         python3 -m twine upload dist/*
 
@@ -78,7 +79,7 @@ workflows:
   version: 2
   test_dev:
     jobs:
-      - test_dev
+      - test_all
   publish_master:
     jobs:
       - pypi_publish
