@@ -43,10 +43,6 @@ references:
 version: 2
 jobs:
     test_all:
-      filters:  # using regex filters requires the entire branch to match
-          branches:
-            only:  # only branches matching the below regex filters will run
-              - develop
       working_directory: ~/pycorr
       docker:
         - image: circleci/python:3.7.1-stretch        
@@ -58,10 +54,6 @@ jobs:
         - <<: *run_unittests
     
     pypi_publish:
-      filters:
-          branches:
-            only: 
-              - master
       working_directory: ~/pycorr
       docker:
         - image: circleci/python:3.7.1-stretch
@@ -79,10 +71,18 @@ workflows:
   version: 2
   test_dev:
     jobs:
-      - test_all
+      - test_all:
+          filters:
+            branches:
+              only:
+                - develop
   publish_master:
     jobs:
-      - pypi_publish
+      - pypi_publish:
+          filters:
+            branches:
+              only: 
+                - master
 
 
 
