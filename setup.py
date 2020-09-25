@@ -8,7 +8,7 @@ from pip._internal.req import parse_requirements
 from setuptools import find_packages, setup
 from setuptools.command.install import install
 
-VERSION = "0.1.4"
+VERSION = "0.1.5"
 
 this_directory = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(this_directory, "README.md"), encoding="utf-8") as f:
